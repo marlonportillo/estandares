@@ -1,6 +1,6 @@
 <?php
-$serverName = 'DESKTOP-0MSFA00\SQLEXPRESS'; //serverName\instanceName
-$connectionInfo = array( "Database"=>"presupuesto", "UID"=>"marlon", "PWD"=>"marlon321");
+$serverName = 'presuutec.database.windows.net'; //serverName\instanceName
+$connectionInfo = array( "Database"=>"presupuesto", "UID"=>"marlon", "PWD"=>"portillo884#");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 if( $conn ) {
