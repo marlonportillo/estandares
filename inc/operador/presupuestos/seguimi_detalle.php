@@ -56,8 +56,8 @@ endif;
         <h5 class="heading">Detalle</h3>
 
 
-            <form method="POST" action="mainsuper.php?module=segui_proc"  enctype="multipart/form-data">
-        <table class="table" id="tablapost">
+            <form method="POST" action="mainoperador.php?module=segui_proc"  enctype="multipart/form-data">
+        <table class="table" id="dtBasicExample"  >
             <thead class="thead-light">
                 <tr>
                     <th style="font-size: 15px" scope="col">Cod</th>
@@ -120,7 +120,7 @@ endif;
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    
                     <td> <button class="btn btn-sm btn-dark" type="submit" id="idejecu" name="boton"> Cerrar Ejecucion </button> </td>
                     <td></td>
                     
@@ -139,14 +139,21 @@ endif;
                                 d.nombre,
                                 c.costo_real,
                                 c.detalle as deta_rea,
-                                c.archivo
+                               case when  c.archivo = 'localhost/Presupuestos/img/' then null else  c.archivo  end as  archivo 
                                 from 
                                 presupuesto a
-                                join detalle b on a.id_presupuesto = b.id_presupuesto
-                                join ejecucion c on b.id_detalle = c.id_detalle
-                                join rubro d on b.id_rubro = d.id_rubro
+                                left join detalle b on a.id_presupuesto = b.id_presupuesto
+                                left join ejecucion c on b.id_detalle = c.id_detalle
+                                left join rubro d on b.id_rubro = d.id_rubro
 
-                                where c.id_presupuesto =  $idp        ";
+                                where c.id_presupuesto =  $idp  
+
+                                union
+                                select null,null,0,b.nombre,a.costo_real ,a.detalle,a.archivo from ejecucion a
+                                join rubro b on  a.id_rubro  =  b.id_rubro
+                                where id_presupuesto =  $idp     
+
+                                      ";
 
                                 $result = sqlsrv_query($conn,$sqlquery);
                                     while($row = sqlsrv_fetch_array($result)){
@@ -172,7 +179,9 @@ endif;
                                  <td></td>
                                  <td></td>
                                  <td></td>
-                                 <td><a href="http://localhost/Presupuestos/inc/super/reportes/report_detalle.php?id=<?php echo $_GET['id']?>" target="_blank" onClick="window.open(this.href, this.target, 'width=700,height=700'); return false;" class="btn btn-success mr-2 ml-2">Genera Reporte</a></td>
+                                 <td><a href="#logoutModal" data-toggle="modal" class="btn btn-sm btn-dark"  id="idejecu" name="boton"> Agregar Compra </a> </td>
+
+                                 <td><a href="http://localhost/Presupuestos/inc/super/reportes/report_detalle.php?id=<?php echo $_GET['id']?>" target="_blank"  class="btn btn-success mr-2 ml-2">Genera Reporte</a></td>
                              </tr>
        <?php }
                 ?>
@@ -182,3 +191,61 @@ endif;
         </form>
     </div>
 </div>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="POST" action="http://localhost/Presupuestos/inc/operador/presupuestos/addcomp.php" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Compra adicional</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+               
+                        <label for="inputEmail4">Rubro:</label>
+                       <select id="inputState" class="form-control" name="rubro">
+                            <?php
+                            include 'conectar.php';
+                            $sqlquery ="SELECT id_rubro,nombre from rubro";
+                            $result = sqlsrv_query($conn,$sqlquery);
+                            while($row = sqlsrv_fetch_array($result)){
+                            ?>
+                            <option  value="<?php echo $row['id_rubro'] ?>"><?php echo $row['nombre'] ?></option>
+                            
+
+                            <?php } ?>   
+                        </select>
+
+                                           
+                    </div>
+                    <div class="form-group col-md-12">
+               
+                       <label>Detalle:</label>
+            <input type="text" class="form-control" name="Detalle" placeholder="">
+
+                                           
+                    </div>
+                    <div class="form-group col-md-12">
+
+                         <label for="inputEmail4">Costo:</label>
+            <input type="number" step="any" class="form-control" name="Costo" id="inputEmail4" placeholder="">
+                        </div>
+                        <input type="hidden" class="form-control" name="idpres" value="<?php echo $_GET['id'] ?>" placeholder="">
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="file" style="width:200px;height:25px;font-size: 15px" name="fact" id="fact" >
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+

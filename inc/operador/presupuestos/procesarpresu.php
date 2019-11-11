@@ -38,7 +38,7 @@ if (headers_sent()) {
     die(" Datos actualizados. Please click on this link: <a href=mainoperario.php?module=listpresu>back </a>");
 }
 else{
-    exit(header("Location: mainsuper.php?module=detailpresu&id=<?php echo $id ?>"));
+    exit(header("Location: mainoperador.php?module=detailpresu&id=<?php echo $id ?>"));
 }
 }
 

@@ -1,3 +1,25 @@
+<?php
+if (!isset($_SESSION)) {
+    # code...
+    session_start();
+}
+
+if (@!$_SESSION['user']) {
+    echo "<script>alert('no haz iniciado sesion ');</script>";
+    header("Location:login.php");
+}
+else{
+    # code.
+    if (isset($_GET['module']) && !empty($_GET['module']))
+     :
+    $module = $_GET['module'];
+   
+
+endif;
+}
+?>
+
+
 <script>
     document.getElementById("TitleModule").innerHTML = "Registrar usuario";
 </script>
@@ -20,25 +42,28 @@
     </thead>
     <tbody>
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>Operador</td>
-            <td><a href="mainadmin.php?module=updateuser" class="btn btn-warning btn-sm">Modificar Usuario</a></td>
+            <?php
+            include 'conectar.php';
+
+
+            $sql="
+SELECT a.id_usuario,a.nombre,a.apellidos,isnull(c.titulo,'no asignado') as titulo  from usuarios a
+left join permisos b on b.id_usuario = a.id_usuario
+left join modulos c on b.id_modulo = c.id_modulo
+ ";
+    $result = sqlsrv_query($conn,$sql);
+
+     while($row = sqlsrv_fetch_array($result)){
+
+            ?>
+            <td><?php echo $row['id_usuario'];?></td>
+            <td><?php echo $row['nombre'];?></td>
+            <td><?php echo $row['apellidos'];?></td>
+            <td><?php echo $row['titulo'];?></td>
+            <td><a href="mainadmin.php?module=updateuser&id=<?php echo $row['id_usuario'];?>" class="btn btn-warning btn-sm">Modificar Usuario</a></td>
+          
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>Administrador</td>
-            <td><a href="mainadmin.php?module=updateuser" class="btn btn-warning btn-sm">Modificar Usuario</a></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>Super administrador</td>
-            <td><a href="mainadmin.php?module=updateuser" class="btn btn-warning btn-sm">Modificar Usuario</a></td>
-        </tr>
+        <?php   }?>
+        
     </tbody>
 </table>

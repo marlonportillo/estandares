@@ -58,6 +58,7 @@ function Footer()
 $anio = $_GET['id'];
 include '../../../conectar.php';
 $iduser  = $_SESSION['id'];
+ $level = $_SESSION['level'];
 $sql = "SELECT 
 d.titulo,
 b.costo_estimado,
@@ -71,7 +72,7 @@ join rubro c  on b.id_rubro = c.id_rubro
 join presupuesto d on  a.id_presupuesto = d.id_presupuesto and datepart(year,fecha_publicacion) = $anio
 join usuarios g on d.id_usuario = g.id_usuario
 
-where d.id_usuario= $iduser
+where d.id_usuario= case when $level in (1,2) then d.id_usuario else $iduser end
  ";
 $result = sqlsrv_query($conn,$sql);
 $sqlqueri ="SELECT 
@@ -83,7 +84,7 @@ join rubro c  on b.id_rubro = c.id_rubro
 join presupuesto d on  a.id_presupuesto = d.id_presupuesto and datepart(year,fecha_publicacion) = $anio
 join usuarios g on d.id_usuario = g.id_usuario
 
-where d.id_usuario= $iduser
+where d.id_usuario= case when $level in (1,2) then d.id_usuario else $iduser end
  ";
 
 $result2 = sqlsrv_query($conn,$sqlqueri);

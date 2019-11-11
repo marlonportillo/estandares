@@ -93,9 +93,11 @@ include '../../../conectar.php';
   $idp = $_GET['id'];
   $iduser  = $_SESSION['id'];
        $ano = $_GET['anio'];
+       $level = $_SESSION['level'];
                 
                 $sqlquery =  "
                                 SELECT DISTINCT
+                                a.titulo,
                                 b.id_detalle ,
                                 b.detalle as deta_pre,
                                 b.costo_estimado,
@@ -111,7 +113,7 @@ include '../../../conectar.php';
                                 join usuarios g on a.id_usuario = g.id_usuario
 
                                 where b.id_rubro =  $idp  and   datepart(year,fecha_publicacion) = $ano 
-                                and a.id_usuario  =$iduser ";
+                                and a.id_usuario  = case when $level in (1,2) then a.id_usuario else $iduser end  ";
 
 $result = sqlsrv_query($conn,$sqlquery);
 $sql = "SELECT 

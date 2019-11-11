@@ -21,7 +21,7 @@ $rutaa = '/Presupuestos/img/'.$fin[(($i+$distacia)+$distacia)];
 $rutacompleta = $fin[(($i+$distacia)+$distacia+$distacia)];
 $idpresu = $fin[((($i+$distacia)+$distacia)+$distacia+$distacia)];
 $iddetalle = $fin[(((($i+$distacia)+$distacia)+$distacia)+$distacia+$distacia)];
-$detall = $fin[$i+$distacia+$distacia];
+$detall = $fin[$i+$distacia];
 
 $dirsubida = "C:/xampp/htdocs/Presupuestos/img/";
 if(empty($_FILES['archivo']['name']))
@@ -57,10 +57,10 @@ if($result === false){
 else{
 
 	if (headers_sent()) {
-	    die(" Datos Registrados correctamente  Please click on this link: <a href=mainsuper.php?module=seguimiento>back </a>");
+	    die(" Datos Registrados correctamente  Please click on this link: <a href=mainoperador.php?module=seguimiento>back </a>");
 	}
 	else{
-	    exit(header("Location: mainsuper.php?module=seguimiento ?>"));
+	    exit(header("Location: mainoperador.php?module=seguimiento ?>"));
 	}
 	
 }
@@ -94,10 +94,10 @@ if($result === false){
 else{
 
 	if (headers_sent()) {
-	    die(" Datos Registrados correctamente  Please click on this link: <a href=mainsuper.php?module=seguimiento>back </a>");
+	    die(" Datos Registrados correctamente  Please click on this link: <a href=mainoperador.php?module=seguimiento>back </a>");
 	}
 	else{
-	    exit(header("Location: mainsuper.php?module=seguimiento ?>"));
+	    exit(header("Location: mainoperador.php?module=seguimiento ?>"));
 	}
 }
 */

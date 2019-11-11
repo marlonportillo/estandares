@@ -39,7 +39,7 @@ endif;
                                     
 
 ?>
-<form method="POST" action="mainsuper.php?module=procesarupddt">
+<form method="POST" action="mainoperador.php?module=procesarupddt">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Detalle:</label>

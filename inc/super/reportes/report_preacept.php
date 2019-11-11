@@ -67,6 +67,7 @@ function Footer()
 $anio = $_GET['id'];
 include '../../../conectar.php';
 $id = $_SESSION['id'];
+ $level = $_SESSION['level'];
 $sql = "SELECT 
 b.id_presupuesto,
 titulo,
@@ -75,7 +76,7 @@ fecha_publicacion
 from 
 presupuesto b
 join aprovados a on b.id_presupuesto = a.id_presupuesto where datepart(year,fecha_publicacion) = $anio
-and b.id_usuario = $id
+and b.id_usuario case when $level in (1,2) then b.id_usuario  else $id end
 ";
 $result = sqlsrv_query($conn,$sql);
 

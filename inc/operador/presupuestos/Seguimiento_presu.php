@@ -27,7 +27,7 @@ endif;
     <h1 class="h3 mb-0 text-gray-800">Listado de presupuestos por evaluar</h1>
 </div>
 <div class="form-group col-md-3">
-<form method="POST" action="mainsuper.php?module=seguimiento" >
+<form method="POST" action="mainoperador.php?module=seguimiento" >
 
     
     Año:
@@ -102,7 +102,7 @@ $result = sqlsrv_query($conn,$sqlquery);
    <td> <?php echo $row['estados'];?> </td>
   <td>
    
-                <a href="mainsuper.php?module=segui_detalle&id=<?php echo $row['id_presupuesto'];?> " class="btn btn-sm btn-dark">Ver detalle</a>
+                <a href="mainoperador.php?module=segui_detalle&id=<?php echo $row['id_presupuesto'];?> " class="btn btn-sm btn-dark">Ver detalle</a>
 
                
                 

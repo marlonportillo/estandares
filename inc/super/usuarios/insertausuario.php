@@ -5,9 +5,8 @@ $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $usuario = $_POST['usuario'];
 $pass = $_POST['pass'];
-$permiso = $_POST['permiso'];
 $estado = $_POST['estado'];
- $hoy = date('y-m-d');
+ $hoy = date('Y-m-d H:i:s');
 
 
 $sql = "INSERT into usuarios (nombre,apellidos,usuario,clave,estado,creacion)

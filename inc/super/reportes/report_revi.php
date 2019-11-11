@@ -59,6 +59,7 @@ function Footer()
 }
 $anio = $_GET['id'];
 $id = $_SESSION['id'];
+ $level = $_SESSION['level'];
 include '../../../conectar.php';
 $sql = "SELECT 
 b.id_presupuesto,

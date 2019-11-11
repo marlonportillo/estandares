@@ -1,17 +1,16 @@
 <?php
 session_start();
-if (@!$_SESSION['user']) {
+if (!$_SESSION['user']) {
+    #Redirect to page login cacaso
     echo "<script>alert('no haz iniciado sesion ');</script>";
     header("Location:login.php");
-}
-else{
-    # code...
+} else {
+    #obtener modulo a mostrar
     if (isset($_GET['module']) && !empty($_GET['module'])) :
-    $module = $_GET['module'];
-endif;
+        $module = $_GET['module'];
+    endif;
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +63,9 @@ endif;
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="mainadmin.php?module=listpresu">Listado General</a>
                         <a class="collapse-item" href="mainadmin.php?module=createpresu">Crear Presupuesto</a>
-                        
+                        <a class="collapse-item" href="mainadmin.php?module=estados">Reportes</a>
+                        <a class="collapse-item" href="mainadmin.php?module=seguimiento">Ejecucion Presupuesto</a>
+
                     </div>
                 </div>
             </li>
@@ -77,9 +78,11 @@ endif;
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="mainadmin.php?module=listuser">Listado General</a>
                         <a class="collapse-item" href="mainadmin.php?module=createuser">Crear Usuario</a>
+                         <a class="collapse-item" href="mainadmin.php?module=asignar_rol">Asignar Rol</a>
                     </div>
                 </div>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-sign-out-alt"></i>
@@ -142,7 +145,7 @@ endif;
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">usuario</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['user'] ?></span>
                                 <i class="fas fa-caret-down fa-sm fa-fw mr-2 text-gray-400"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -179,10 +182,26 @@ endif;
                         if ($module == "createuser") :
                             include "inc/administrador/usuarios/createuser.php";
                         endif;
+                        if ($module == "procesauser") :
+                            include "inc/administrador/usuarios/insertausuario.php";
+                        endif;
+                        if ($module == "asignar_rol") :
+                            include "inc/administrador/usuarios/asignar_permisos.php";
+                        endif;
+                        if ($module == "procesrol") :
+                            include "inc/administrador/usuarios/prossrol.php";
+                        endif;
+                        if ($module == "procesuser") :
+                            include "inc/administrador/usuarios/procesupdaetuser.php";
+                        endif;
+                        
 
                         //Modules for Presupuesto Function
                         if ($module == "createpresu") :
                             include "inc/administrador/presupuestos/createpresu.php";
+                        endif;
+                        if ($module == "insertpresu") :
+                            include "inc/administrador/presupuestos/insert.php";
                         endif;
                         if ($module == "updatepresu") :
                             include "inc/administrador/presupuestos/updatepresu.php";
@@ -193,15 +212,89 @@ endif;
                         if ($module == "detailpresu") :
                             include "inc/administrador/presupuestos/detailpresu.php";
                         endif;
+                        if ($module == "procdetall") :
+                            include "inc/administrador/presupuestos/procesardetalle.php";
+                        endif;
+                        if ($module == "updtdet") :
+                            include "inc/administrador/presupuestos/updatedetalle.php";
+                        endif;
+                        if ($module == "procesarupddt") :
+                            include "inc/administrador/presupuestos/procesardettup.php";
+                        endif;
+                        if ($module == "procesarpres") :
+                            include "inc/administrador/presupuestos/procesarpresu.php";
+                        endif;
+                        if ($module == "creardetal") :
+                            include "inc/administrador/presupuestos/creardetalle.php";
+                        endif;
                         if ($module == "evaluatepresu") :
                             include "inc/administrador/presupuestos/evaluatepresu.php";
                         endif;
+                        // procesamiento de revision de presupuestos 
+                        if ($module == "rechazar") :
+                            include "inc/administrador/presupuestos/rechazar.php";
+                        endif;
+                        if ($module == "revisa") :
+                            include "inc/administrador/presupuestos/revisar.php";
+                        endif;
+                        if ($module == "aprovar") :
+                            include "inc/administrador/presupuestos/aprobar.php";
+                        endif;
+                        if ($module == "estados") :
+                            include "inc/administrador/presupuestos/estados_presu.php";
+                        endif;
+                        // segumiento
+                        if ($module == "seguimiento") :
+                            include "inc/administrador/presupuestos/Seguimiento_presu.php";
+                        endif;
+                        if ($module == "segui_detalle") :
+                            include "inc/administrador/presupuestos/seguimi_detalle.php";
+                        endif;
+                        if ($module == "segui_proc") :
+                            include "inc/administrador/presupuestos/seguimi_procesa.php";
+                        endif;
+                        // reportes
+                        if ($module == "rep_det") :
+                            include "inc/administrador/presupuestos/selectpresu.php";
+                        endif;
+                        if ($module == "rep_aprov") :
+                            include "inc/administrador/presupuestos/report_preacept.php";
+                        endif;
+                        if ($module == "rep_rub") :
+                            include "inc/administrador/presupuestos/selectrub.php";
+                        endif;
+                        if ($module == "selectyear") :
+                            include "inc/administrador/presupuestos/selectyear.php";
+                        endif;
+                        if ($module == "selectyearrev") :
+                            include "inc/administrador/presupuestos/select_year_rev.php";
+                        endif;
+                        if ($module == "selectyearrech") :
+                            include "inc/administrador/presupuestos/select_year_rech.php";
+                        endif;
+                        if ($module == "selectyeargener") :
+                            include "inc/administrador/presupuestos/selectyear_gene.php";
+                        endif;
+
+
 
                         //Modules Prefil 
                         if ($module == "editperfil") :
                             include "inc/administrador/perfil/editperfil.php";
                         endif;
-
+                        if ($module == "updateperfil") :
+                            include "inc/administrador/perfil/update.php";
+                        endif;
+                        // modulos de catalogos 
+                        if ($module == "area") :
+                            include "inc/administrador/catalogos/areas.php";
+                        endif;
+                        if ($module == "roles") :
+                            include "inc/administrador/catalogos/roles.php";
+                        endif;
+                        if ($module == "rubros") :
+                            include "inc/administrador/catalogos/rubros.php";
+                        endif;
 
                     endif;
                     ?>
@@ -244,21 +337,26 @@ endif;
                 <div class="modal-body">Selecciona cerrra sesión para confirmar.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.php">Cerrar Sesión</a>
+                    <a class="btn btn-primary" href="desconectar.php">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="js/jquery.min.js"></script>
+    
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    
+    <script src="moda.js"></script>
+    <script src="modal2.js"></script>
 </body>
 
 </html>

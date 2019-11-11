@@ -17,6 +17,7 @@ function Header()
 {
     // Logo
      $idp = $_GET['id'];
+     
     include '../../../conectar.php';
 $sql = "SELECT 
 b.id_presupuesto,
@@ -118,16 +119,33 @@ include '../../../conectar.php';
                                 join [dbo].ejecucion c on b.id_detalle = c.id_detalle
                                 join [dbo].rubro d on b.id_rubro = d.id_rubro
 
-                                where c.id_presupuesto =  $idp        ";
+                                where c.id_presupuesto =  $idp  
+
+                                 union
+                                select null,null,0,b.nombre,a.costo_real ,a.detalle,a.archivo from ejecucion a
+                                join rubro b on  a.id_rubro  =  b.id_rubro
+                                where id_presupuesto =  $idp       ";
 
 $result = sqlsrv_query($conn,$sqlquery);
-$sql = "SELECT 
+$sql = "SELECT
+sum(x.costo_estimados) AS costo_estimados,
+sum(x.costo_reals) as costo_reals
+from
+(
+SELECT 
 sum(costo_estimado) as costo_estimados,
 sum(costo_real) as costo_reals
 from 
 detalle a 
 join ejecucion b on a.id_detalle = b.id_detalle
 where b.id_presupuesto = $idp
+
+
+ union
+                                select 0,sum(a.costo_real) from ejecucion a
+                                join rubro b on  a.id_rubro  =  b.id_rubro
+                                where id_presupuesto =  $idp
+                                )x 
 ";
 $result2 = sqlsrv_query($conn,$sql);
 

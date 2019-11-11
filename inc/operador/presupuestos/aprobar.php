@@ -22,7 +22,7 @@ if ($estado != 1 )
 	if ($estado == 2) {
 		# code...
 
-		echo " El presupuesto  fue Rechazado <a href=mainsuper.php?module=listpresu>back </a>";
+		echo " El presupuesto  fue Rechazado <a href=mainoperador.php?module=listpresu>back </a>";
 	}
 	else
 	{
@@ -42,10 +42,10 @@ if ($estado != 1 )
 			else{
 
 			if (headers_sent()) {
-			    die("   Please click on this link: <a href=mainsuper.php?module=listpresu>back </a>");
+			    die("   Please click on this link: <a href=mainoperador.php?module=listpresu>back </a>");
 			}
 			else{
-			    exit(header("Location: mainsuper.php?module=detailpresu&id=<?php echo $id ?>"));
+			    exit(header("Location: mainoperador.php?module=detailpresu&id=<?php echo $id ?>"));
 			}
 		}
 
@@ -57,7 +57,7 @@ if ($estado != 1 )
 
 else
 {
-	echo " El presupuesto ya fue elvaluado <a href=mainsuper.php?module=listpresu>back </a>";
+	echo " El presupuesto ya fue elvaluado <a href=mainoperador.php?module=listpresu>back </a>";
 }
 
 ?>

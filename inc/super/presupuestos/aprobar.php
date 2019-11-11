@@ -6,7 +6,7 @@ include 'conectar.php';
     $id = $_POST["idpresu"];
     $coment = $_POST["mejoras"];
     $iduser = $_POST["id"];
-    $hoy = date('y-m-d');
+    $hoy = date('d/M/Y');
     $sql="SELECT estado FROM presupuesto where id_presupuesto = $id ";
     $result3 = sqlsrv_query($conn,$sql);
 

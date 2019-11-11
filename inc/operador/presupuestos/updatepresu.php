@@ -50,7 +50,7 @@ endif;
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Complete la siguiente información</h1>
 </div>
-<form  method="POST" action="mainsuper.php?module=procesarpres">
+<form  method="POST" action="mainoperador.php?module=procesarpres">
     <div class="form-row">
         <div class="form-group col-md-8">
             <label>Titulo:</label>

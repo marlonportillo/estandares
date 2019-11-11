@@ -87,7 +87,7 @@ endif;
         <tr>
             <th scope="col">Cod</th>
             <th scope="col">Titulo</th>
-            <th scope="col">Descripcion</th>
+            <th scope="col">Area</th>
             <th scope="col">Fecha Publicación</th>
             <th scope="col">Estados</th>
             <th scope="col">Opciones</th>
@@ -124,14 +124,16 @@ endif;
         SELECT 
 id_presupuesto,
 titulo,
-descripcion,
+b.descripcion,
 fecha_publicacion,
+nom_area,
 case when b.estado = 0 then 'no evaluado'
  when b.estado =  1 then 'Aprobado'
     when b.estado =  2 then 'Rechazado'
     when b.estado =  3 then 'Revision'  end as estados ,b.estado
 from 
 presupuesto b 
+join areas c on id_area = presu_id_area
 join usuarios a on b.id_usuario = a.id_usuario
 where datepart(year,fecha_publicacion) = $ano and b.estado = $esta and b.id_usuario =$iduser 
 ";
@@ -145,7 +147,7 @@ else
    <tr>
   <th scope="row"> <?php echo $row['id_presupuesto'];?> </th>
   <td> <?php echo $row['titulo'];?> </td>
-  <td > <?php echo $row['descripcion'];?> </td>
+  <td > <?php echo $row['nom_area'];?> </td>
   <td> <?php echo   $row['fecha_publicacion']->format('d/m/Y');?> </td>
    <td> <?php echo $row['estados'];?> </td>
   <td>

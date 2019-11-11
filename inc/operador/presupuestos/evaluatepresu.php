@@ -110,7 +110,7 @@ endif;
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST" action="mainsuper.php?module=revisa">
+            <form method="POST" action="mainoperador.php?module=revisa">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Mandar a Revisión</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -137,7 +137,7 @@ endif;
 <div class="modal fade" id="apro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST" action="mainsuper.php?module=aprovar">
+            <form method="POST" action="mainoperador.php?module=aprovar">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Aprobado</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -165,7 +165,7 @@ endif;
 <div class="modal fade" id="rech" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST" action="mainsuper.php?module=rechazar">
+            <form method="POST" action="mainoperador.php?module=rechazar">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Rechazar</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">

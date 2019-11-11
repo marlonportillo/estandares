@@ -78,6 +78,20 @@ if (!$_SESSION['user']) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="mainsuper.php?module=listuser">Listado General</a>
                         <a class="collapse-item" href="mainsuper.php?module=createuser">Crear Usuario</a>
+                         <a class="collapse-item" href="mainsuper.php?module=asignar_rol">Asignar Rol</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true" aria-controls="collapsePages3">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Catalogos</span>
+                </a>
+                <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="mainsuper.php?module=area">Areas</a>
+                        <a class="collapse-item" href="mainsuper.php?module=roles">Roles</a>
+                         <a class="collapse-item" href="mainsuper.php?module=rubros">Rubros</a>
                     </div>
                 </div>
             </li>
@@ -183,6 +197,16 @@ if (!$_SESSION['user']) {
                         if ($module == "procesauser") :
                             include "inc/super/usuarios/insertausuario.php";
                         endif;
+                        if ($module == "asignar_rol") :
+                            include "inc/super/usuarios/asignar_permisos.php";
+                        endif;
+                        if ($module == "procesrol") :
+                            include "inc/super/usuarios/prossrol.php";
+                        endif;
+                        if ($module == "procesuser") :
+                            include "inc/super/usuarios/procesupdaetuser.php";
+                        endif;
+                        
 
                         //Modules for Presupuesto Function
                         if ($module == "createpresu") :
@@ -273,7 +297,16 @@ if (!$_SESSION['user']) {
                         if ($module == "updateperfil") :
                             include "inc/super/perfil/update.php";
                         endif;
-
+                        // modulos de catalogos 
+                        if ($module == "area") :
+                            include "inc/super/catalogos/areas.php";
+                        endif;
+                        if ($module == "roles") :
+                            include "inc/super/catalogos/roles.php";
+                        endif;
+                        if ($module == "rubros") :
+                            include "inc/super/catalogos/rubros.php";
+                        endif;
 
                     endif;
                     ?>
@@ -324,13 +357,18 @@ if (!$_SESSION['user']) {
 
     <!-- Bootstrap core JavaScript-->
     <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-
+    
     <!-- Core plugin JavaScript-->
     <script src="js/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    
+    <script src="moda.js"></script>
+    <script src="modal2.js"></script>
 </body>
 
 </html>

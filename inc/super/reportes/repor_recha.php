@@ -64,6 +64,7 @@ function Footer()
 }
 $anio = $_GET['id'];
 $id = $_SESSION['id'];
+ $level = $_SESSION['level'];
 include '../../../conectar.php';
 $sql = "SELECT 
 b.id_presupuesto,
@@ -73,7 +74,7 @@ fecha_publicacion
 from 
 [dbo].presupuesto b
 join rechazados a on b.id_presupuesto = a.id_presupuesto and datepart(year,fecha_publicacion) = $anio
-and b.id_usuario = $id";
+and b.id_usuario = case when $levl in (1,2) then b.id_usuario else $id end";
 $result = sqlsrv_query($conn,$sql);
 
 

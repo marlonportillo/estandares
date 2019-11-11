@@ -37,10 +37,10 @@ if($result === false){
 else{
 
 if (headers_sent()) {
-    die("presupuesto creado. Please click on this link: <a href=mainsuper.php?module=listpresu>back </a>");
+    die("presupuesto creado. Please click on this link: <a href=mainoperador.php?module=listpresu>back </a>");
 }
 else{
-    exit(header("Location: mainsuper.php?module=editperfil"));
+    exit(header("Location: mainoperador.php?module=editperfil"));
 }
 }
 

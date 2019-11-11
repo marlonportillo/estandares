@@ -39,10 +39,10 @@ if($result === false){
 else{
 
 if (headers_sent()) {
-    die(" <script>alert('Detalle Actualizado');window.opener.location.reload('mainsuper.php?module=listpresu&id=<?php echo $id ?>');self.close();</script>");
+    die(" <script>alert('Detalle Actualizado');window.opener.location.reload('mainoperador.php?module=listpresu&id=<?php echo $id ?>');self.close();</script>");
 }
 else{
-    exit(header("Location: mainsuper.php?module=detailpresu&id=<?php echo $id ?>"));
+    exit(header("Location: mainoperador.php?module=detailpresu&id=<?php echo $id ?>"));
 }
 }
 

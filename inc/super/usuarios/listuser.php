@@ -47,7 +47,7 @@ endif;
 
 
             $sql="
-SELECT a.id_usuario,a.nombre,a.apellidos,c.titulo from usuarios a
+SELECT a.id_usuario,a.nombre,a.apellidos,isnull(c.titulo,'no asignado') as titulo  from usuarios a
 left join permisos b on b.id_usuario = a.id_usuario
 left join modulos c on b.id_modulo = c.id_modulo
  ";
